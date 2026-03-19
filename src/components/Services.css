@@ -59,11 +59,16 @@
   opacity: 1;
 }
 
+.service-card:hover .service-card__icon {
+  transform: translateY(-2px) scale(1.1);
+}
+
 .service-card__icon {
   width: 40px;
   height: 40px;
   color: var(--color-accent);
   margin-bottom: var(--space-5);
+  transition: transform var(--duration-normal) var(--ease-default);
   display: flex;
   align-items: center;
   justify-content: center;

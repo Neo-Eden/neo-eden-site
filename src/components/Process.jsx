@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import './Process.css';
 
 const steps = [
@@ -39,6 +40,13 @@ const stepVariants = {
 };
 
 export default function Process() {
+  const timelineRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ['start end', 'end center'],
+  });
+  const scaleY = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+
   return (
     <section className="process section" id="processo">
       <div className="container">
@@ -56,7 +64,10 @@ export default function Process() {
           </p>
         </motion.div>
 
-        <div className="process__timeline">
+        <div className="process__timeline" ref={timelineRef}>
+          {/* Animated fill line */}
+          <motion.div className="process__timeline-fill" style={{ scaleY }} />
+
           {steps.map((step, i) => (
             <motion.div
               key={step.number}
@@ -68,8 +79,20 @@ export default function Process() {
               transition={{ delay: i * 0.1 }}
             >
               <div className="process__node">
-                <span className="process__node-ring" />
-                <span className="process__node-dot" />
+                <motion.span
+                  className="process__node-ring"
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+                />
+                <motion.span
+                  className="process__node-dot"
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: 0.1 + i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+                />
               </div>
               <div className="process__step-content">
                 <span className="process__step-number">Etapa {step.number}</span>

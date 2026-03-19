@@ -1,6 +1,63 @@
+import { motion } from 'framer-motion';
 import { HiOutlineGlobeAlt } from 'react-icons/hi';
 import { FaInstagram, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
 import './Footer.css';
+
+const staggerContainer = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.06 },
+  },
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
+  },
+};
+
+const navLinks = [
+  { label: 'Serviços', href: '#servicos' },
+  { label: 'Sobre', href: '#sobre' },
+  { label: 'Portfólio', href: '#portfolio' },
+  { label: 'Processo', href: '#processo' },
+];
+
+const serviceLinks = [
+  { label: 'Branding', href: '#servicos' },
+  { label: 'Web Dev', href: '#servicos' },
+  { label: 'UI/UX', href: '#servicos' },
+  { label: 'Marketing', href: '#servicos' },
+];
+
+const contactLinks = [
+  { label: 'Email', href: 'mailto:contato@neo-eden.com.br' },
+  { label: 'Formulário', href: '#contato' },
+  { label: 'WhatsApp', href: '#' },
+];
+
+const socials = [
+  { icon: <FaInstagram />, label: 'Instagram', href: '#' },
+  { icon: <FaLinkedinIn />, label: 'LinkedIn', href: '#' },
+  { icon: <FaTwitter />, label: 'Twitter', href: '#' },
+  { icon: <HiOutlineGlobeAlt />, label: 'Website', href: '#' },
+];
+
+function FooterColumn({ title, links }) {
+  return (
+    <motion.div variants={fadeUp}>
+      <h4 className="footer__column-title">{title}</h4>
+      <div className="footer__links">
+        {links.map(({ label, href }) => (
+          <a key={label} href={href} className="footer__link">{label}</a>
+        ))}
+      </div>
+    </motion.div>
+  );
+}
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -8,9 +65,15 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div className="container">
-        <div className="footer__grid">
+        <motion.div
+          className="footer__grid"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-40px' }}
+        >
           {/* Brand */}
-          <div className="footer__brand">
+          <motion.div className="footer__brand" variants={fadeUp}>
             <div className="footer__logo">
               <svg width="28" height="28" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M6 30V6L30 30V6" stroke="#1CE07A" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -21,53 +84,30 @@ export default function Footer() {
             <p className="footer__brand-desc">
               Digital studio criando experiências extraordinárias. Do jardim do vazio, fazemos o futuro florescer.
             </p>
-          </div>
+          </motion.div>
 
-          {/* Navigation */}
-          <div>
-            <h4 className="footer__column-title">Navegação</h4>
-            <div className="footer__links">
-              <a href="#servicos" className="footer__link">Serviços</a>
-              <a href="#sobre" className="footer__link">Sobre</a>
-              <a href="#portfolio" className="footer__link">Portfólio</a>
-              <a href="#processo" className="footer__link">Processo</a>
-            </div>
-          </div>
-
-          {/* Services */}
-          <div>
-            <h4 className="footer__column-title">Serviços</h4>
-            <div className="footer__links">
-              <a href="#servicos" className="footer__link">Branding</a>
-              <a href="#servicos" className="footer__link">Web Dev</a>
-              <a href="#servicos" className="footer__link">UI/UX</a>
-              <a href="#servicos" className="footer__link">Marketing</a>
-            </div>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h4 className="footer__column-title">Contato</h4>
-            <div className="footer__links">
-              <a href="mailto:contato@neo-eden.com.br" className="footer__link">Email</a>
-              <a href="#contato" className="footer__link">Formulário</a>
-              <a href="#" className="footer__link">WhatsApp</a>
-            </div>
-          </div>
-        </div>
+          <FooterColumn title="Navegação" links={navLinks} />
+          <FooterColumn title="Serviços" links={serviceLinks} />
+          <FooterColumn title="Contato" links={contactLinks} />
+        </motion.div>
 
         {/* Bottom */}
-        <div className="footer__bottom">
+        <motion.div
+          className="footer__bottom"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
           <span className="footer__copyright">
             © {year} Neo Eden Digital Studio. Todos os direitos reservados.
           </span>
           <div className="footer__socials">
-            <a href="#" className="footer__social" aria-label="Instagram"><FaInstagram /></a>
-            <a href="#" className="footer__social" aria-label="LinkedIn"><FaLinkedinIn /></a>
-            <a href="#" className="footer__social" aria-label="Twitter"><FaTwitter /></a>
-            <a href="#" className="footer__social" aria-label="Website"><HiOutlineGlobeAlt /></a>
+            {socials.map(({ icon, label, href }) => (
+              <a key={label} href={href} className="footer__social" aria-label={label}>{icon}</a>
+            ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );

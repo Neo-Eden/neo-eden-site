@@ -303,3 +303,62 @@ textarea.form-input {
   background: var(--color-accent-20);
   color: var(--color-text-primary);
 }
+
+/* === PAGE LOADER === */
+.page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--color-bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-loader__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.page-loader__text {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  letter-spacing: -0.3px;
+}
+
+/* === SCROLL PROGRESS === */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-accent);
+  transform-origin: left;
+  z-index: 200;
+}
+
+/* === BUTTON GLOW === */
+.btn-glow {
+  position: relative;
+}
+
+.btn-glow::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: var(--color-accent);
+  opacity: 0;
+  filter: blur(14px);
+  z-index: -1;
+  transition: opacity var(--duration-normal) var(--ease-default);
+}
+
+.btn-glow:hover::after {
+  opacity: 0.35;
+}

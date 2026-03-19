@@ -97,12 +97,22 @@
   transition: width var(--duration-normal) var(--ease-default);
 }
 
-.navbar__link:hover {
+.navbar__link:hover,
+.navbar__link.active {
   color: var(--color-text-primary);
 }
 
-.navbar__link:hover::after {
+.navbar__link:hover::after,
+.navbar__link.active::after {
   width: 100%;
+}
+
+.navbar__link.active {
+  color: var(--color-accent);
+}
+
+.navbar__link.active::after {
+  background: var(--color-accent);
 }
 
 .navbar__cta {
