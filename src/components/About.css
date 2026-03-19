@@ -1,0 +1,113 @@
+/* =============================================
+   ABOUT
+   ============================================= */
+.about {
+  position: relative;
+}
+
+.about__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-16);
+  align-items: center;
+}
+
+.about__text {
+  max-width: 520px;
+}
+
+.about__description {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+  margin-top: var(--space-5);
+}
+
+.about__description + .about__description {
+  margin-top: var(--space-4);
+}
+
+.about__visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about__visual-frame {
+  width: 100%;
+  aspect-ratio: 1;
+  max-width: 420px;
+  border: 0.5px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  background: linear-gradient(135deg, #0D1A13 0%, #070F0B 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.about__visual-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, #0A4F2E 1px, transparent 1px);
+  background-size: 28px 28px;
+  opacity: 0.3;
+}
+
+.about__visual-n {
+  position: relative;
+  z-index: 1;
+}
+
+/* Stats */
+.about__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--grid-gap);
+  margin-top: var(--space-20);
+  padding-top: var(--space-10);
+  border-top: 0.5px solid var(--color-border);
+}
+
+.stat-item__value {
+  font-family: var(--font-display);
+  font-size: var(--text-display-lg);
+  font-weight: 700;
+  color: var(--color-accent);
+  line-height: 1;
+}
+
+.stat-item__label {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  color: var(--color-text-secondary);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: var(--space-2);
+}
+
+@media (max-width: 1024px) {
+  .about__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+  }
+  .about__visual {
+    order: -1;
+  }
+  .about__visual-frame {
+    max-width: 320px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .about__stats {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+    text-align: center;
+  }
+}
