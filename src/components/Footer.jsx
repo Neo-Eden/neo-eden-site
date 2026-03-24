@@ -82,7 +82,7 @@ export default function Footer() {
               <span className="footer__logo-name">Neo Eden</span>
             </div>
             <p className="footer__brand-desc">
-              Digital studio criando experiências extraordinárias. Do jardim do vazio, fazemos o futuro florescer.
+              Studio digital especializado em criar sites, marcas e estratégias que geram resultados para o seu negócio.
             </p>
           </motion.div>
 

@@ -62,10 +62,9 @@ export default function Contact() {
             variants={fadeUp}
           >
             <span className="section-tag">// Contato</span>
-            <h2 className="section-heading">Vamos criar algo extraordinário</h2>
+            <h2 className="section-heading">Vamos conversar sobre seu projeto</h2>
             <p className="contact__description">
-              Pronto para transformar sua presença digital? Entre em contato e vamos
-              discutir como podemos dar vida à sua visão.
+              Conta pra gente o que você precisa. Respondemos rápido e sem compromisso.
             </p>
 
             <motion.div

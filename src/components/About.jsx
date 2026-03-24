@@ -71,16 +71,15 @@ export default function About() {
             variants={fadeUp}
           >
             <span className="section-tag">// Sobre nós</span>
-            <h2 className="section-heading">O jardim do futuro digital</h2>
+            <h2 className="section-heading">Quem somos e por que existimos</h2>
             <p className="about__description">
-              A Neo Eden nasceu da visão de que tecnologia e design devem coexistir com intenção e precisão.
-              Somos um studio digital que transforma marcas em experiências extraordinárias — onde cada pixel
-              é plantado com propósito.
+              A Neo Eden é um studio digital que ajuda empresas a vender mais usando design e tecnologia.
+              Criamos sites, marcas e estratégias que trazem resultados reais — mais clientes, mais vendas,
+              mais crescimento.
             </p>
             <p className="about__description">
-              Nossa direção criativa, <strong style={{ color: 'var(--color-accent)' }}>Void Garden</strong>,
-              representa a escuridão sofisticada de onde a vida tecnológica emerge. Trabalhamos com exclusividade,
-              selecionando projetos que nos desafiam a criar algo verdadeiramente transformador.
+              Nosso diferencial é simples: entregamos trabalho de alto nível com atendimento próximo.
+              Você não vai ser mais um número aqui. Cada projeto recebe atenção total do início ao fim.
             </p>
           </motion.div>
 

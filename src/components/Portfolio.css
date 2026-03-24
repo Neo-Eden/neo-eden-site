@@ -60,24 +60,17 @@
   position: relative;
 }
 
-.portfolio-card__image::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(circle, #0A4F2E 1px, transparent 1px);
-  background-size: 20px 20px;
-  opacity: 0.25;
+.portfolio-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
 }
 
-.portfolio-card__image-label {
-  position: relative;
-  z-index: 1;
-  font-family: var(--font-display);
-  font-size: var(--text-h2);
-  font-weight: 700;
-  color: var(--color-accent);
-  opacity: 0.3;
-  letter-spacing: -0.5px;
+/* App thumbnail — show centered on dark bg instead of cropping */
+.portfolio-card__image--app .portfolio-card__img {
+  object-fit: contain;
+  padding: var(--space-4);
 }
 
 .portfolio-card__overlay {
@@ -140,6 +133,11 @@
   font-size: var(--text-body-sm);
   color: var(--color-text-secondary);
   line-height: var(--leading-relaxed);
+}
+
+/* Last card spans full width when odd number of items */
+.portfolio-card--full {
+  grid-column: 1 / -1;
 }
 
 @media (max-width: 768px) {

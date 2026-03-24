@@ -6,37 +6,37 @@ const services = [
   {
     icon: <HiOutlineColorSwatch />,
     title: 'Branding & Identidade',
-    description: 'Construímos identidades visuais que comunicam a essência da sua marca com precisão e sofisticação.',
+    description: 'Criamos logos e identidades visuais profissionais que passam confiança e fazem seu negócio se destacar.',
     tags: ['Logo', 'Brand Guide', 'Visual Identity'],
   },
   {
     icon: <HiOutlineCode />,
     title: 'Desenvolvimento Web',
-    description: 'Sites e aplicações de alta performance com código limpo, responsivos e otimizados para conversão.',
+    description: 'Sites rápidos, bonitos e que funcionam em qualquer dispositivo. Feitos para atrair e converter visitantes em clientes.',
     tags: ['React', 'Next.js', 'Full-Stack'],
   },
   {
     icon: <HiOutlineLightningBolt />,
     title: 'UI/UX Design',
-    description: 'Interfaces intuitivas e experiências memoráveis, pensadas para engajar e converter.',
+    description: 'Layouts fáceis de usar que guiam o visitante até a ação que você quer: comprar, contratar ou entrar em contato.',
     tags: ['Figma', 'Protótipos', 'Design System'],
   },
   {
     icon: <HiOutlineGlobe />,
     title: 'Marketing Digital',
-    description: 'Estratégias data-driven para posicionar sua marca no ecosistema digital com resultados mensuráveis.',
+    description: 'Estratégias para sua empresa aparecer no Google, nas redes sociais e atrair os clientes certos.',
     tags: ['SEO', 'Analytics', 'Growth'],
   },
   {
     icon: <HiOutlineDeviceMobile />,
     title: 'Apps Mobile',
-    description: 'Aplicações mobile nativas e híbridas que entregam experiências premium aos seus usuários.',
+    description: 'Aplicativos para celular que seus clientes vão usar no dia a dia, disponíveis para iPhone e Android.',
     tags: ['React Native', 'iOS', 'Android'],
   },
   {
     icon: <HiOutlineChartBar />,
     title: 'Consultoria Tech',
-    description: 'Assessoria técnica para tomada de decisões estratégicas em tecnologia e arquitetura de sistemas.',
+    description: 'Te ajudamos a escolher as melhores ferramentas e tecnologias para o seu negócio crescer sem dor de cabeça.',
     tags: ['Arquitetura', 'DevOps', 'Otimização'],
   },
 ];
@@ -69,9 +69,9 @@ export default function Services() {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
           <span className="section-tag">// Serviços</span>
-          <h2 className="section-heading">Soluções completas para o mundo digital</h2>
+          <h2 className="section-heading">Tudo que seu negócio precisa para crescer online</h2>
           <p className="services__subtitle">
-            Do conceito à execução, criamos ecossistemas digitais que fazem marcas crescerem com intenção e excelência.
+            Da marca ao site, do marketing aos resultados. A gente cuida de tudo para você focar no que importa: seu negócio.
           </p>
         </motion.div>
 

@@ -6,27 +6,27 @@ const steps = [
   {
     number: '01',
     title: 'Descoberta',
-    description: 'Mergulhamos no universo da sua marca. Entendemos objetivos, público, concorrência e a essência que torna você único.',
+    description: 'Conversamos com você para entender seu negócio, seus clientes e o que você precisa alcançar.',
   },
   {
     number: '02',
     title: 'Estratégia',
-    description: 'Definimos a arquitetura do projeto, wireframes e um roadmap claro com metas mensuráveis para cada fase.',
+    description: 'Montamos um plano claro com prazos, etapas e o que vai ser entregue. Sem surpresas.',
   },
   {
     number: '03',
     title: 'Design & Prototipagem',
-    description: 'Criamos interfaces de alta fidelidade no Figma, iterando com feedback até atingir a excelência visual e funcional.',
+    description: 'Criamos o visual do projeto e te mostramos antes de desenvolver. Você aprova cada detalhe.',
   },
   {
     number: '04',
     title: 'Desenvolvimento',
-    description: 'Código limpo, performance otimizada e stack moderna. Cada linha é escrita com intenção e qualidade.',
+    description: 'Construímos o projeto com tecnologia moderna. Site rápido, seguro e que funciona em qualquer tela.',
   },
   {
     number: '05',
     title: 'Lançamento & Evolução',
-    description: 'Deploy, monitoramento e iteração contínua. Seu produto digital cresce e evolui com dados e feedback real.',
+    description: 'Colocamos no ar e acompanhamos os resultados com você. Ajustamos o que for preciso para melhorar.',
   },
 ];
 
@@ -58,9 +58,9 @@ export default function Process() {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
           <span className="section-tag">// Processo</span>
-          <h2 className="section-heading">Como transformamos ideias em realidade</h2>
+          <h2 className="section-heading">Como funciona trabalhar com a gente</h2>
           <p className="process__subtitle">
-            Nosso processo é estruturado para garantir qualidade, transparência e resultados em cada etapa.
+            Processo simples e transparente. Você acompanha tudo e sabe exatamente o que está acontecendo.
           </p>
         </motion.div>
 

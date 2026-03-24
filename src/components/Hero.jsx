@@ -9,12 +9,14 @@ const stats = [
 ];
 
 const titleWords = [
-  { text: 'Criamos', accent: false },
-  { text: 'experiências', accent: false },
-  { text: 'digitais', accent: true },
-  { text: 'que', accent: false },
-  { text: 'transformam', accent: false },
-  { text: 'marcas', accent: false },
+  { text: 'Sua', accent: false },
+  { text: 'empresa', accent: false },
+  { text: 'precisa', accent: false },
+  { text: 'vender', accent: true },
+  { text: 'mais?', accent: false },
+  { text: 'A', accent: false },
+  { text: 'gente', accent: false },
+  { text: 'resolve.', accent: false },
 ];
 
 const wordVariants = {
@@ -88,7 +90,7 @@ export default function Hero() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
-            // Bem-vindo ao futuro
+            // Studio de Design & Tecnologia
           </motion.span>
 
           <h1 className="hero__title">
@@ -113,8 +115,8 @@ export default function Hero() {
             variants={fadeUp}
             custom={1}
           >
-            Design, desenvolvimento e estratégia digital de alto padrão.
-            Construímos o jardim do futuro para a sua marca.
+            Criamos sites, marcas e estratégias digitais que trazem clientes
+            de verdade para o seu negócio.
           </motion.p>
 
           <motion.div
