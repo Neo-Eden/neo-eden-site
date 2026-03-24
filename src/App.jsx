@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
+import neoEdenLogo from './assets/neo-eden.svg';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Services from './components/Services';
@@ -28,34 +29,15 @@ function Loader({ onComplete }) {
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
     >
       <div className="page-loader__content">
-        <motion.svg
-          width="60"
-          height="60"
-          viewBox="0 0 36 36"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <motion.path
-            d="M6 30V6L30 30V6"
-            stroke="#1CE07A"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: 1, opacity: 1 }}
-            transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-          />
-          <motion.circle
-            cx="6"
-            cy="6"
-            r="3"
-            fill="#1CE07A"
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 0.4, scale: 1 }}
-            transition={{ duration: 0.4, delay: 1.0 }}
-            onAnimationComplete={onComplete}
-          />
-        </motion.svg>
+        <motion.img
+          src={neoEdenLogo}
+          alt=""
+          className="page-loader__logo"
+          initial={{ opacity: 0, scale: 0.7 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          onAnimationComplete={onComplete}
+        />
         <motion.span
           className="page-loader__text"
           initial={{ opacity: 0, y: 8 }}

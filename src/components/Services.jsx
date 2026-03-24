@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { HiOutlineCode, HiOutlineColorSwatch, HiOutlineLightningBolt, HiOutlineGlobe, HiOutlineChartBar, HiOutlineDeviceMobile } from 'react-icons/hi';
+import { HiOutlineCode, HiOutlineColorSwatch, HiOutlineLightningBolt, HiOutlineChartBar, HiOutlineDeviceMobile, HiOutlineCog } from 'react-icons/hi';
 import './Services.css';
 
 const services = [
@@ -22,12 +22,6 @@ const services = [
     tags: ['Figma', 'Protótipos', 'Design System'],
   },
   {
-    icon: <HiOutlineGlobe />,
-    title: 'Marketing Digital',
-    description: 'Estratégias para sua empresa aparecer no Google, nas redes sociais e atrair os clientes certos.',
-    tags: ['SEO', 'Analytics', 'Growth'],
-  },
-  {
     icon: <HiOutlineDeviceMobile />,
     title: 'Apps Mobile',
     description: 'Aplicativos para celular que seus clientes vão usar no dia a dia, disponíveis para iPhone e Android.',
@@ -38,6 +32,12 @@ const services = [
     title: 'Consultoria Tech',
     description: 'Te ajudamos a escolher as melhores ferramentas e tecnologias para o seu negócio crescer sem dor de cabeça.',
     tags: ['Arquitetura', 'DevOps', 'Otimização'],
+  },
+  {
+    icon: <HiOutlineCog />,
+    title: 'Automações',
+    description: 'Integramos sistemas, criamos bots e workflows que eliminam tarefas manuais e fazem seu negócio rodar no automático.',
+    tags: ['APIs', 'Chatbots', 'Workflows'],
   },
 ];
 
@@ -71,7 +71,7 @@ export default function Services() {
           <span className="section-tag">// Serviços</span>
           <h2 className="section-heading">Tudo que seu negócio precisa para crescer online</h2>
           <p className="services__subtitle">
-            Da marca ao site, do marketing aos resultados. A gente cuida de tudo para você focar no que importa: seu negócio.
+            Da marca ao site, do design ao app. A gente cuida de tudo para você focar no que importa: seu negócio.
           </p>
         </motion.div>
 

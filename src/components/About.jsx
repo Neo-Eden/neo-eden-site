@@ -74,7 +74,7 @@ export default function About() {
             <h2 className="section-heading">Quem somos e por que existimos</h2>
             <p className="about__description">
               A Neo Eden é um studio digital que ajuda empresas a vender mais usando design e tecnologia.
-              Criamos sites, marcas e estratégias que trazem resultados reais — mais clientes, mais vendas,
+              Criamos sites, aplicativos e estratégias que trazem resultados reais — mais clientes, mais vendas,
               mais crescimento.
             </p>
             <p className="about__description">

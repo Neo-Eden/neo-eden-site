@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { HiOutlineArrowRight } from 'react-icons/hi';
 import { FaGooglePlay, FaAppStoreIos, FaGlobe } from 'react-icons/fa';
 import ProjectModal from './ProjectModal';
+import neoEdenLogo from '../assets/neo-eden.svg';
 import './Portfolio.css';
 
 // Thumbnails
@@ -12,6 +13,7 @@ import primeGourmetThumb from '../assets/prime-gourmet-thumb.png';
 import primeAppThumb from '../assets/prime-app-thumb.jpeg';
 import tagmaxThumb from '../assets/tagmax-5.jpeg';
 import trackmaxThumb from '../assets/trackmax-thumb.jpeg';
+import baliThumb from '../assets/bali-thumb.jpeg';
 
 // Gallery helper — sorts glob results by filename and extracts default exports
 function loadGallery(glob) {
@@ -46,6 +48,9 @@ const trackmaxAll = loadGallery(
 );
 // Remove "about" screen (index 6) and splash (index 8)
 const trackmaxGallery = trackmaxAll.filter((_, i) => i !== 6 && i !== 8);
+const baliGallery = loadGallery(
+  import.meta.glob('../assets/bali-[0-9].jpeg', { eager: true })
+);
 
 const projects = [
   {
@@ -141,6 +146,19 @@ const projects = [
     mobileGallery: trackmaxGallery,
     links: [],
   },
+  {
+    category: 'App Mobile',
+    title: 'Best of Bali',
+    description:
+      'App de descoberta de restaurantes, spas e experiências em Bali com cupons de desconto.',
+    summary:
+      'Aplicativo para turistas e moradores de Bali descobrirem os melhores restaurantes, wellness centers, spas, cafés e experiências da ilha. Oferece cupons de desconto exclusivos, roteiros personalizados por região com itinerários sugeridos, recomendações baseadas no perfil do usuário, sistema de favoritos e mapa integrado. Navegação por abas: Home, Map, Explore, Profile e Dashboard.',
+    image: baliThumb,
+    thumbType: 'app',
+    desktopGallery: [],
+    mobileGallery: baliGallery,
+    links: [],
+  },
 ];
 
 const containerVariants = {
@@ -187,14 +205,10 @@ export default function Portfolio() {
           whileInView="visible"
           viewport={{ once: true, margin: '-60px' }}
         >
-          {projects.map((project, index) => (
+          {projects.map((project) => (
             <motion.div
               key={project.title}
-              className={`portfolio-card${
-                projects.length % 2 !== 0 && index === projects.length - 1
-                  ? ' portfolio-card--full'
-                  : ''
-              }`}
+              className="portfolio-card"
               variants={cardVariants}
               onClick={() => setSelected(project)}
             >
@@ -227,6 +241,25 @@ export default function Portfolio() {
               </div>
             </motion.div>
           ))}
+
+          {/* CTA Card */}
+          <motion.a
+            href="#contato"
+            className="portfolio-card portfolio-card--cta"
+            variants={cardVariants}
+          >
+            <div className="portfolio-card__cta-inner">
+              <img src={neoEdenLogo} alt="" className="portfolio-card__cta-n" />
+              <span className="portfolio-card__cta-tag">Próximo Projeto</span>
+              <h3 className="portfolio-card__cta-title">Seu Projeto Aqui</h3>
+              <p className="portfolio-card__cta-desc">
+                Vamos transformar sua ideia em resultado real.
+              </p>
+              <span className="portfolio-card__cta-btn">
+                Iniciar Projeto <HiOutlineArrowRight />
+              </span>
+            </div>
+          </motion.a>
         </motion.div>
       </div>
 

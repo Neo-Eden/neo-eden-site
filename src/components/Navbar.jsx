@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import neoEdenLogo from '../assets/neo-eden.svg';
 import './Navbar.css';
 
 const navLinks = [
@@ -49,10 +50,7 @@ export default function Navbar() {
       <div className="container">
         {/* Logo */}
         <a href="#" className="navbar__logo" aria-label="Neo Eden">
-          <svg className="navbar__logo-symbol" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M6 30V6L30 30V6" stroke="#1CE07A" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-            <circle cx="6" cy="6" r="3" fill="#1CE07A" opacity="0.4"/>
-          </svg>
+          <img src={neoEdenLogo} alt="" className="navbar__logo-symbol" />
           <span className="navbar__logo-separator" />
           <span className="navbar__logo-text">
             <span className="navbar__logo-name">Neo Eden</span>

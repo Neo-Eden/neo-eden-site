@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { HiOutlineGlobeAlt } from 'react-icons/hi';
 import { FaInstagram, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
+import neoEdenLogo from '../assets/neo-eden.svg';
 import './Footer.css';
 
 const staggerContainer = {
@@ -34,9 +35,9 @@ const serviceLinks = [
 ];
 
 const contactLinks = [
-  { label: 'Email', href: 'mailto:contato@neo-eden.com.br' },
+  { label: 'Email', href: 'mailto:lettsantos2022@gmail.com' },
   { label: 'Formulário', href: '#contato' },
-  { label: 'WhatsApp', href: '#' },
+  { label: 'WhatsApp', href: 'https://wa.me/5522999452824' },
 ];
 
 const socials = [
@@ -75,14 +76,11 @@ export default function Footer() {
           {/* Brand */}
           <motion.div className="footer__brand" variants={fadeUp}>
             <div className="footer__logo">
-              <svg width="28" height="28" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M6 30V6L30 30V6" stroke="#1CE07A" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                <circle cx="6" cy="6" r="3" fill="#1CE07A" opacity="0.4"/>
-              </svg>
+              <img src={neoEdenLogo} alt="" className="footer__logo-n" />
               <span className="footer__logo-name">Neo Eden</span>
             </div>
             <p className="footer__brand-desc">
-              Studio digital especializado em criar sites, marcas e estratégias que geram resultados para o seu negócio.
+              Studio digital especializado em criar sites, aplicativos e estratégias que geram resultados para o seu negócio.
             </p>
           </motion.div>
 

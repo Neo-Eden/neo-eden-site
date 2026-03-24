@@ -115,7 +115,7 @@ export default function Hero() {
             variants={fadeUp}
             custom={1}
           >
-            Criamos sites, marcas e estratégias digitais que trazem clientes
+            Criamos sites, aplicativos e estratégias digitais que trazem clientes
             de verdade para o seu negócio.
           </motion.p>
 

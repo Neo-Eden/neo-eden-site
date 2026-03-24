@@ -26,9 +26,10 @@
   margin-bottom: var(--space-5);
 }
 
-.footer__logo svg {
+.footer__logo-n {
   width: 28px;
   height: 28px;
+  mix-blend-mode: screen;
 }
 
 .footer__logo-name {
