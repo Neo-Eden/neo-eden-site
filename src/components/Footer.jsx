@@ -31,7 +31,7 @@ const serviceLinks = [
   { label: 'Branding', href: '#servicos' },
   { label: 'Web Dev', href: '#servicos' },
   { label: 'UI/UX', href: '#servicos' },
-  { label: 'Marketing', href: '#servicos' },
+  { label: 'Automações', href: '#servicos' },
 ];
 
 const contactLinks = [
