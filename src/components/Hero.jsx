@@ -1,151 +1,158 @@
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import './Hero.css';
+import { useEffect, useRef } from 'react';
+import { scrollToId } from '../lib/hooks.js';
+import Icon from './Icon.jsx';
 
-const stats = [
-  { value: '50+', label: 'Projetos' },
-  { value: '30+', label: 'Clientes' },
-  { value: '3+', label: 'Anos' },
-];
-
-const titleWords = [
-  { text: 'Sua', accent: false },
-  { text: 'empresa', accent: false },
-  { text: 'precisa', accent: false },
-  { text: 'vender', accent: true },
-  { text: 'mais?', accent: false },
-  { text: 'A', accent: false },
-  { text: 'gente', accent: false },
-  { text: 'resolve.', accent: false },
-];
-
-const wordVariants = {
-  hidden: { opacity: 0, y: 24, filter: 'blur(8px)' },
-  visible: (i) => ({
-    opacity: 1,
-    y: 0,
-    filter: 'blur(0px)',
-    transition: { duration: 0.7, delay: 0.4 + i * 0.1, ease: [0.16, 1, 0.3, 1] },
-  }),
-};
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, delay: 0.6 + i * 0.15, ease: [0.16, 1, 0.3, 1] },
-  }),
-};
-
-const particles = Array.from({ length: 6 }, (_, i) => ({
-  id: i,
-  left: `${12 + i * 15}%`,
-  top: `${18 + (i % 3) * 28}%`,
-  size: 2 + (i % 3),
-  duration: 3 + i * 0.6,
-  delay: i * 0.5,
-}));
+function Mockup() {
+  const bars = [42, 58, 50, 71, 64, 83, 92];
+  return (
+    <div className="mock">
+      <div className="mock-bar">
+        <span className="mock-dots">
+          <i />
+          <i />
+          <i />
+        </span>
+        <span className="mock-url">central.arrobabandalarga.com.br</span>
+      </div>
+      <div className="mock-body">
+        <div className="mock-side">
+          <span className="mi on">Visão geral</span>
+          <span className="mi">Atendimentos</span>
+          <span className="mi">Clientes</span>
+          <span className="mi">Automações</span>
+          <span className="mi">Financeiro</span>
+        </div>
+        <div className="mock-main">
+          <div className="mock-kpis">
+            <div className="mock-kpi">
+              <div className="kl">Tickets hoje</div>
+              <div className="kv" data-count="128">128</div>
+              <div className="kd">−34% manual</div>
+            </div>
+            <div className="mock-kpi">
+              <div className="kl">Resolvidos por IA</div>
+              <div className="kv a" data-count="71" data-suffix="%">71%</div>
+              <div className="kd">+19 pts</div>
+            </div>
+            <div className="mock-kpi">
+              <div className="kl">Tempo médio</div>
+              <div className="kv" data-count="2" data-suffix="m">2m</div>
+              <div className="kd">−58%</div>
+            </div>
+          </div>
+          <div className="mock-chart">
+            <div className="ct">
+              <span>Atendimentos automatizados · 7 dias</span>
+              <span className="pill">ao vivo</span>
+            </div>
+            <div className="bars">
+              {bars.map((h, i) => (
+                <div key={i} className={'bar' + (i < 4 ? ' dim' : '')} style={{ height: h + '%' }} />
+              ))}
+            </div>
+          </div>
+          <div className="mock-rows">
+            <div className="mock-row" style={{ '--i': 0 }}>
+              <span className="mn">Renovação de plano</span>
+              <span className="tag">automático</span>
+              <span>00:03</span>
+            </div>
+            <div className="mock-row" style={{ '--i': 1 }}>
+              <span className="mn">2ª via de boleto</span>
+              <span className="tag">automático</span>
+              <span>00:01</span>
+            </div>
+            <div className="mock-row" style={{ '--i': 2 }}>
+              <span className="mn">Suporte técnico N1</span>
+              <span className="tag warn">triagem IA</span>
+              <span>00:12</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="mock-badge">
+        <div className="bi">
+          <Icon name="check" size={18} />
+        </div>
+        <div>
+          <div className="bt">−40h/semana</div>
+          <div className="bs">trabalho manual eliminado</div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function Hero() {
-  const sectionRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start start', 'end start'],
-  });
-  const contentY = useTransform(scrollYProgress, [0, 1], [0, -120]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+  const heroRef = useRef(null);
+  useEffect(() => {
+    const el = heroRef.current;
+    if (!el) return;
+    const id = requestAnimationFrame(() => el.classList.add('boot'));
+    return () => cancelAnimationFrame(id);
+  }, []);
 
+  const go = (e, id) => {
+    e.preventDefault();
+    scrollToId(id);
+  };
   return (
-    <section className="hero" id="hero" ref={sectionRef}>
-      <div className="hero__glow" />
-      <div className="dot-grid-bg" />
-
-      {/* Floating particles */}
-      <div className="hero__particles" aria-hidden="true">
-        {particles.map((p) => (
-          <motion.div
-            key={p.id}
-            className="hero__particle"
-            style={{ left: p.left, top: p.top, width: p.size, height: p.size }}
-            animate={{
-              y: [0, -30, 0],
-              opacity: [0.15, 0.5, 0.15],
-            }}
-            transition={{
-              duration: p.duration,
-              repeat: Infinity,
-              delay: p.delay,
-              ease: 'easeInOut',
-            }}
-          />
-        ))}
-      </div>
-
-      <motion.div className="container" style={{ y: contentY, opacity: contentOpacity }}>
-        <div className="hero__content">
-          <motion.span
-            className="hero__tag"
-            initial={{ opacity: 0, x: -16 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          >
-            // Studio de Design & Tecnologia
-          </motion.span>
-
-          <h1 className="hero__title">
-            {titleWords.map((word, i) => (
-              <motion.span
-                key={i}
-                className={`hero__title-word ${word.accent ? 'hero__title-word--accent' : ''}`}
-                initial="hidden"
-                animate="visible"
-                variants={wordVariants}
-                custom={i}
+    <section className="hero" id="top" ref={heroRef}>
+      <div className="hero-glow" />
+      <div className="hero-grid-bg" />
+      <div className="frame">
+        <div className="hero-split">
+          <div className="hero-inner">
+            <h1 className="hero-h1">
+              Seu negócio cresceu. <span className="muted">Sua operação</span>{' '}
+              <span className="a">acompanhou?</span>
+            </h1>
+            <p className="hero-sub">
+              Criamos{' '}
+              <strong>sistemas, aplicativos, automações e integrações sob medida</strong> para
+              empresas que precisam crescer sem aumentar o caos operacional.
+            </p>
+            <div className="hero-cta">
+              <a
+                href="#contato"
+                onClick={(e) => go(e, 'contato')}
+                className="btn btn-primary btn-lg"
               >
-                {word.accent ? <em>{word.text}</em> : word.text}
-              </motion.span>
-            ))}
-          </h1>
-
-          <motion.p
-            className="hero__subtitle"
-            initial="hidden"
-            animate="visible"
-            variants={fadeUp}
-            custom={1}
-          >
-            Criamos sites, aplicativos e estratégias digitais que trazem clientes
-            de verdade para o seu negócio.
-          </motion.p>
-
-          <motion.div
-            className="hero__actions"
-            initial="hidden"
-            animate="visible"
-            variants={fadeUp}
-            custom={2}
-          >
-            <a href="#contato" className="btn-primary btn-glow">Iniciar Projeto</a>
-            <a href="#portfolio" className="btn-secondary">Ver Portfólio</a>
-          </motion.div>
-
-          <motion.div
-            className="hero__stats"
-            initial="hidden"
-            animate="visible"
-            variants={fadeUp}
-            custom={3}
-          >
-            {stats.map(({ value, label }) => (
-              <div key={label} className="hero__stat">
-                <div className="hero__stat-value">{value}</div>
-                <div className="hero__stat-label">{label}</div>
-              </div>
-            ))}
-          </motion.div>
+                Falar com nossa equipe{' '}
+                <span className="arr">
+                  <Icon name="arrow" size={16} />
+                </span>
+              </a>
+              <a
+                href="#solucoes"
+                onClick={(e) => go(e, 'solucoes')}
+                className="btn btn-ghost btn-lg"
+              >
+                Conhecer soluções
+              </a>
+            </div>
+            <div className="hero-micro">
+              <span className="ok">Escopo e prazo fechados</span>
+              <span className="ok">Você fala com quem constrói</span>
+            </div>
+          </div>
+          <div className="hero-mock">
+            <Mockup />
+          </div>
         </div>
-      </motion.div>
+
+        <div className="trustbar reveal">
+          <span className="tlabel">Empresas que confiam na Neo Eden</span>
+          <div className="tlogos">
+            {['Arroba Banda Larga', 'Prime Gourmet Club', 'Trackmax Soluções'].map((l) => (
+              <span key={l} className="tlogo">
+                <span className="tdot" />
+                {l}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
     </section>
   );
 }

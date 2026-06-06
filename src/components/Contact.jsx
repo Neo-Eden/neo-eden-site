@@ -1,171 +1,163 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { HiOutlineMail, HiOutlineLocationMarker, HiOutlinePhone } from 'react-icons/hi';
-import './Contact.css';
+import Icon from './Icon.jsx';
 
+const NEEDS = ['Atendimento / suporte', 'Sistema sob medida', 'Aplicativo', 'Automação', 'IA', 'Ainda não sei'];
+
+// Contatos reais (restaurados do site anterior). Confirmar se seguem atuais.
 const WEB3FORMS_KEY = '07747be7-1bdf-479a-b526-c6d4375ce2ef';
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
-  },
+const CONTACT = {
+  whatsappLabel: '(22) 99945-2824',
+  whatsappUrl: 'https://wa.me/5522999452824',
+  email: 'neoedendev2022@gmail.com',
 };
-
-const staggerDetails = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.1, delayChildren: 0.3 },
-  },
-};
-
-const detailItem = {
-  hidden: { opacity: 0, x: -16 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
-  },
-};
-
-const staggerForm = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.08, delayChildren: 0.2 },
-  },
-};
-
-const formItem = {
-  hidden: { opacity: 0, y: 16 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
-  },
-};
-
-const contactDetails = [
-  { icon: <HiOutlineMail />, label: 'Email', value: 'lettsantos2022@gmail.com', href: 'mailto:lettsantos2022@gmail.com' },
-  { icon: <HiOutlinePhone />, label: 'WhatsApp', value: '(22) 99945-2824', href: 'https://wa.me/5522999452824' },
-  { icon: <HiOutlineLocationMarker />, label: 'Localização', value: 'Campos dos Goytacazes, RJ' },
-];
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
-  const [status, setStatus] = useState('idle'); // idle | sending | success | error
+  const [need, setNeed] = useState(NEEDS[0]);
+  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState('idle'); // idle | sending | error
 
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
-
-  const handleSubmit = async (e) => {
+  const submit = async (e) => {
     e.preventDefault();
     setStatus('sending');
+    const fd = new FormData(e.target);
+    fd.append('access_key', WEB3FORMS_KEY);
+    fd.append('from_name', fd.get('name') || 'Site Neo Eden');
+    fd.append('subject', `[Neo Eden] Novo contato — ${need}`);
+    fd.append('Necessidade', need);
     try {
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          access_key: WEB3FORMS_KEY,
-          from_name: form.name,
-          subject: `[Neo Eden] ${form.subject}`,
-          ...form,
-        }),
-      });
+      const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd });
       const data = await res.json();
-      if (data.success) {
-        setStatus('success');
-        setForm({ name: '', email: '', subject: '', message: '' });
-      } else {
-        setStatus('error');
-      }
+      if (data.success) setSent(true);
+      else setStatus('error');
     } catch {
       setStatus('error');
     }
   };
 
   return (
-    <section className="contact section" id="contato">
-      <div className="container">
-        <div className="contact__grid">
-          <motion.div
-            className="contact__info"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
-            variants={fadeUp}
-          >
-            <span className="section-tag">// Contato</span>
-            <h2 className="section-heading">Vamos conversar sobre seu projeto</h2>
-            <p className="contact__description">
-              Conta pra gente o que você precisa. Respondemos rápido e sem compromisso.
+    <section className="section" id="contato">
+      <div className="frame">
+        <div className="contact-grid">
+          <div className="contact-info reveal">
+            <span className="eyebrow">Falar com a Neo Eden</span>
+            <h2 className="contact-h">
+              Vamos resolver o <span className="a">gargalo</span> do seu negócio?
+            </h2>
+            <p className="contact-lead">
+              Conte o que está travando. Em até 24h úteis nossa equipe responde com um caminho, não
+              com um catálogo.
             </p>
-
-            <motion.div
-              className="contact__details"
-              variants={staggerDetails}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-60px' }}
-            >
-              {contactDetails.map(({ icon, label, value, href }) => (
-                <motion.div key={label} className="contact__detail" variants={detailItem}>
-                  <div className="contact__detail-icon">{icon}</div>
-                  <div className="contact__detail-text">
-                    <span className="contact__detail-label">{label}</span>
-                    {href ? (
-                      <a href={href} target="_blank" rel="noopener noreferrer" className="contact__detail-value contact__detail-link">{value}</a>
-                    ) : (
-                      <span className="contact__detail-value">{value}</span>
-                    )}
+            <ul className="channels">
+              <li>
+                <a className="channel" href={CONTACT.whatsappUrl} target="_blank" rel="noopener noreferrer">
+                  <span className="cic">
+                    <Icon name="whatsapp" size={18} />
+                  </span>
+                  <div>
+                    <div className="cn">WhatsApp</div>
+                    <div className="cv">{CONTACT.whatsappLabel}</div>
                   </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </motion.div>
+                  <span className="carr">
+                    <Icon name="arrow" size={16} />
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a className="channel" href={`mailto:${CONTACT.email}`}>
+                  <span className="cic">
+                    <Icon name="mail" size={18} />
+                  </span>
+                  <div>
+                    <div className="cn">E-mail</div>
+                    <div className="cv">{CONTACT.email}</div>
+                  </div>
+                  <span className="carr">
+                    <Icon name="arrow" size={16} />
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a className="channel" href={CONTACT.whatsappUrl} target="_blank" rel="noopener noreferrer">
+                  <span className="cic">
+                    <Icon name="calendar" size={18} />
+                  </span>
+                  <div>
+                    <div className="cn">Agendar conversa</div>
+                    <div className="cv">Diagnóstico gratuito · 30 min</div>
+                  </div>
+                  <span className="carr">
+                    <Icon name="arrow" size={16} />
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
 
-          <motion.form
-            className="contact__form"
-            variants={staggerForm}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
-            onSubmit={handleSubmit}
-          >
-            <motion.div className="contact__form-row" variants={formItem}>
-              <div className="contact__form-group">
-                <label className="contact__form-label" htmlFor="contact-name">Nome</label>
-                <input type="text" id="contact-name" name="name" className="form-input" placeholder="Seu nome" required value={form.name} onChange={handleChange} />
+          <div className="form reveal">
+            {sent ? (
+              <div className="form-sent">
+                <div className="ck">
+                  <Icon name="check" size={24} />
+                </div>
+                <h4>Recebido. Já estamos vendo.</h4>
+                <p>
+                  Um especialista responde em até 24h úteis com um primeiro caminho para o seu
+                  problema.
+                </p>
               </div>
-              <div className="contact__form-group">
-                <label className="contact__form-label" htmlFor="contact-email">Email</label>
-                <input type="email" id="contact-email" name="email" className="form-input" placeholder="seu@email.com" required value={form.email} onChange={handleChange} />
-              </div>
-            </motion.div>
-            <motion.div className="contact__form-group" variants={formItem}>
-              <label className="contact__form-label" htmlFor="contact-subject">Assunto</label>
-              <input type="text" id="contact-subject" name="subject" className="form-input" placeholder="Sobre o que deseja conversar?" required value={form.subject} onChange={handleChange} />
-            </motion.div>
-            <motion.div className="contact__form-group" variants={formItem}>
-              <label className="contact__form-label" htmlFor="contact-message">Mensagem</label>
-              <textarea id="contact-message" name="message" className="form-input" placeholder="Conte-nos sobre seu projeto..." required value={form.message} onChange={handleChange} />
-            </motion.div>
-            <motion.div variants={formItem}>
-              <button type="submit" className="btn-primary btn-glow" disabled={status === 'sending'}>
-                {status === 'sending' ? 'Enviando...' : 'Enviar Mensagem'}
-              </button>
-            </motion.div>
-            {status === 'success' && (
-              <motion.p className="contact__feedback contact__feedback--success" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
-                Mensagem enviada com sucesso! Responderemos em breve.
-              </motion.p>
+            ) : (
+              <form onSubmit={submit}>
+                {/* honeypot anti-spam */}
+                <input type="checkbox" name="botcheck" tabIndex="-1" autoComplete="off" style={{ display: 'none' }} />
+                <div className="form-label">O que você precisa resolver?</div>
+                <div className="radios">
+                  {NEEDS.map((n) => (
+                    <button
+                      type="button"
+                      key={n}
+                      className={'radio' + (need === n ? ' on' : '')}
+                      onClick={() => setNeed(n)}
+                    >
+                      {n}
+                    </button>
+                  ))}
+                </div>
+                <div className="field">
+                  <label htmlFor="c-name">Seu nome</label>
+                  <input id="c-name" name="name" required placeholder="Como podemos te chamar" />
+                </div>
+                <div className="field">
+                  <label htmlFor="c-company">Empresa</label>
+                  <input id="c-company" name="company" placeholder="Nome da empresa" />
+                </div>
+                <div className="field">
+                  <label htmlFor="c-contact">WhatsApp ou e-mail</label>
+                  <input id="c-contact" name="contato" required placeholder="Onde a gente te responde" />
+                </div>
+                <div className="field">
+                  <label htmlFor="c-message">O que está travando?</label>
+                  <textarea id="c-message" name="message" placeholder="Descreva o problema em poucas linhas" />
+                </div>
+                <div className="form-foot">
+                  <button type="submit" className="btn btn-primary btn-lg" disabled={status === 'sending'}>
+                    {status === 'sending' ? 'Enviando…' : 'Falar com nossa equipe'}
+                    {status !== 'sending' && (
+                      <span className="arr">
+                        <Icon name="arrow" size={16} />
+                      </span>
+                    )}
+                  </button>
+                  <span className="form-sla">Resposta em 24h úteis</span>
+                </div>
+                {status === 'error' && (
+                  <p className="form-error">
+                    Não consegui enviar agora. Tenta de novo ou chama no{' '}
+                    <a href={CONTACT.whatsappUrl} target="_blank" rel="noopener noreferrer">WhatsApp</a>.
+                  </p>
+                )}
+              </form>
             )}
-            {status === 'error' && (
-              <motion.p className="contact__feedback contact__feedback--error" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
-                Erro ao enviar. Tente novamente ou entre em contato pelo WhatsApp.
-              </motion.p>
-            )}
-          </motion.form>
+          </div>
         </div>
       </div>
     </section>

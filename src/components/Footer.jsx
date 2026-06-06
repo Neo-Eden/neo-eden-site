@@ -1,111 +1,81 @@
-import { motion } from 'framer-motion';
-import { HiOutlineGlobeAlt } from 'react-icons/hi';
-import { FaInstagram, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
-import neoEdenLogo from '../assets/neo-eden.svg';
-import './Footer.css';
-
-const staggerContainer = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.06 },
-  },
-};
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 16 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
-  },
-};
-
-const navLinks = [
-  { label: 'Serviços', href: '#servicos' },
-  { label: 'Sobre', href: '#sobre' },
-  { label: 'Portfólio', href: '#portfolio' },
-  { label: 'Processo', href: '#processo' },
-];
-
-const serviceLinks = [
-  { label: 'Branding', href: '#servicos' },
-  { label: 'Web Dev', href: '#servicos' },
-  { label: 'UI/UX', href: '#servicos' },
-  { label: 'Automações', href: '#servicos' },
-];
-
-const contactLinks = [
-  { label: 'Email', href: 'mailto:lettsantos2022@gmail.com' },
-  { label: 'Formulário', href: '#contato' },
-  { label: 'WhatsApp', href: 'https://wa.me/5522999452824' },
-];
-
-const socials = [
-  { icon: <FaInstagram />, label: 'Instagram', href: '#' },
-  { icon: <FaLinkedinIn />, label: 'LinkedIn', href: '#' },
-  { icon: <FaTwitter />, label: 'Twitter', href: '#' },
-  { icon: <HiOutlineGlobeAlt />, label: 'Website', href: '#' },
-];
-
-function FooterColumn({ title, links }) {
-  return (
-    <motion.div variants={fadeUp}>
-      <h4 className="footer__column-title">{title}</h4>
-      <div className="footer__links">
-        {links.map(({ label, href }) => (
-          <a key={label} href={href} className="footer__link">{label}</a>
-        ))}
-      </div>
-    </motion.div>
-  );
-}
+import { scrollToId } from '../lib/hooks.js';
+import Icon from './Icon.jsx';
+import logoMark from '../assets/logo-n.png';
 
 export default function Footer() {
-  const year = new Date().getFullYear();
-
+  const go = (e, id) => {
+    e.preventDefault();
+    scrollToId(id);
+  };
   return (
     <footer className="footer">
-      <div className="container">
-        <motion.div
-          className="footer__grid"
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-40px' }}
-        >
-          {/* Brand */}
-          <motion.div className="footer__brand" variants={fadeUp}>
-            <div className="footer__logo">
-              <img src={neoEdenLogo} alt="" className="footer__logo-n" />
-              <span className="footer__logo-name">Neo Eden</span>
-            </div>
-            <p className="footer__brand-desc">
-              Studio digital especializado em criar sites, aplicativos e estratégias que geram resultados para o seu negócio.
-            </p>
-          </motion.div>
-
-          <FooterColumn title="Navegação" links={navLinks} />
-          <FooterColumn title="Serviços" links={serviceLinks} />
-          <FooterColumn title="Contato" links={contactLinks} />
-        </motion.div>
-
-        {/* Bottom */}
-        <motion.div
-          className="footer__bottom"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-        >
-          <span className="footer__copyright">
-            © {year} Neo Eden Digital Studio. Todos os direitos reservados.
+      <div className="frame">
+        <h2 className="footer-cta reveal">
+          Pronto para tirar o gargalo <span className="a">do caminho?</span>
+        </h2>
+        <p className="footer-sub reveal">
+          Comece por uma conversa de diagnóstico gratuita. Sem compromisso, sem enrolação.
+        </p>
+        <a href="#contato" onClick={(e) => go(e, 'contato')} className="btn btn-primary btn-lg reveal">
+          Falar com nossa equipe{' '}
+          <span className="arr">
+            <Icon name="arrow" size={16} />
           </span>
-          <div className="footer__socials">
-            {socials.map(({ icon, label, href }) => (
-              <a key={label} href={href} className="footer__social" aria-label={label}>{icon}</a>
-            ))}
+        </a>
+
+        <div className="footer-cols reveal reveal-stagger">
+          <div className="fcol fcol-brand">
+            <div className="row">
+              <img src={logoMark} alt="" />
+              <span className="w">
+                Neo <span className="e">Eden</span>
+              </span>
+            </div>
+            <p>
+              Empresa de tecnologia. Sistemas, aplicativos, automações e IA sob medida para resolver
+              problemas reais de empresas.
+            </p>
+            <div className="footer-socials">
+              <a href="https://www.instagram.com/neoedendigital/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <Icon name="instagram" size={18} />
+              </a>
+              <a href="https://wa.me/5522999452824" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                <Icon name="whatsapp" size={18} />
+              </a>
+              <a href="mailto:neoedendev2022@gmail.com" aria-label="E-mail">
+                <Icon name="mail" size={18} />
+              </a>
+            </div>
           </div>
-        </motion.div>
+          <div className="fcol">
+            <div className="ft">Soluções</div>
+            <a href="#solucoes" onClick={(e) => go(e, 'solucoes')}>Aplicativos</a>
+            <a href="#solucoes" onClick={(e) => go(e, 'solucoes')}>Sistemas sob medida</a>
+            <a href="#solucoes" onClick={(e) => go(e, 'solucoes')}>Automações</a>
+            <a href="#solucoes" onClick={(e) => go(e, 'solucoes')}>Inteligência Artificial</a>
+            <a href="#solucoes" onClick={(e) => go(e, 'solucoes')}>Integrações</a>
+          </div>
+          <div className="fcol">
+            <div className="ft">Empresa</div>
+            <a href="#exemplos" onClick={(e) => go(e, 'exemplos')}>Exemplos</a>
+            <a href="#portfolio" onClick={(e) => go(e, 'portfolio')}>Portfólio</a>
+            <a href="#acompanhar" onClick={(e) => go(e, 'acompanhar')}>Portal do cliente</a>
+            <a href="#processo" onClick={(e) => go(e, 'processo')}>Como trabalhamos</a>
+            <a href="#empresa" onClick={(e) => go(e, 'empresa')}>Quem somos</a>
+            <a href="#faq" onClick={(e) => go(e, 'faq')}>Dúvidas</a>
+          </div>
+          <div className="fcol">
+            <div className="ft">Contato</div>
+            <a href="https://wa.me/5522999452824" target="_blank" rel="noopener noreferrer">WhatsApp (22) 99945-2824</a>
+            <a href="mailto:neoedendev2022@gmail.com">neoedendev2022@gmail.com</a>
+            <a href="#contato" onClick={(e) => go(e, 'contato')}>Agendar conversa</a>
+          </div>
+        </div>
+
+        <div className="footer-final">
+          <span>© 2026 Neo Eden · Tecnologia que resolve</span>
+          <span className="made">Campos dos Goytacazes · RJ</span>
+        </div>
       </div>
     </footer>
   );

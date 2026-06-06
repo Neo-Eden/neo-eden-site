@@ -1,273 +1,144 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { HiOutlineArrowRight } from 'react-icons/hi';
-import { FaGooglePlay, FaAppStoreIos, FaGlobe } from 'react-icons/fa';
-import ProjectModal from './ProjectModal';
-import neoEdenLogo from '../assets/neo-eden.svg';
-import './Portfolio.css';
+import { scrollToId } from '../lib/hooks.js';
+import Icon from './Icon.jsx';
+import arrobaImg from '../assets/arroba-cliente-1.png';
+import primeImg from '../assets/prime-app-1.jpeg';
+import trackmaxImg from '../assets/trackmax-1.jpeg';
+import tagmaxImg from '../assets/tagmax-1.jpeg';
+import baliImg from '../assets/bali-1.jpeg';
 
-// Thumbnails
-import arrobaSiteThumb from '../assets/arroba-site-thumb.png';
-import arrobaClienteThumb from '../assets/arroba-cliente-thumb.png';
-import primeGourmetThumb from '../assets/prime-gourmet-thumb.png';
-import primeAppThumb from '../assets/prime-app-thumb.jpeg';
-import tagmaxThumb from '../assets/tagmax-5.jpeg';
-import trackmaxThumb from '../assets/trackmax-thumb.jpeg';
-import baliThumb from '../assets/bali-thumb.jpeg';
-
-// Gallery helper — sorts glob results by filename and extracts default exports
-function loadGallery(glob) {
-  return Object.entries(glob)
-    .sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }))
-    .map(([, mod]) => mod.default);
-}
-
-// Gallery images (eager: URLs only, browser lazy-loads actual data)
-const arrobaSiteGallery = loadGallery(
-  import.meta.glob('../assets/arroba-site-[0-9]*.png', { eager: true })
-);
-const arrobaClienteDesktop = loadGallery(
-  import.meta.glob('../assets/arroba-cliente-[0-9]*.png', { eager: true })
-);
-const arrobaClienteMobile = loadGallery(
-  import.meta.glob('../assets/arroba-cliente-app-*.jpeg', { eager: true })
-);
-const primeDesktop = loadGallery(
-  import.meta.glob('../assets/prime-site-*.png', { eager: true })
-);
-const primeMobileAll = loadGallery(
-  import.meta.glob('../assets/prime-app-[0-9]*.jpeg', { eager: true })
-);
-const tagmaxAll = loadGallery(
-  import.meta.glob('../assets/tagmax-[0-9].jpeg', { eager: true })
-);
-// Remove login (index 0) and splash (index 3)
-const tagmaxGallery = tagmaxAll.filter((_, i) => i !== 0 && i !== 3);
-const trackmaxAll = loadGallery(
-  import.meta.glob('../assets/trackmax-[0-9].jpeg', { eager: true })
-);
-// Remove "about" screen (index 6) and splash (index 8)
-const trackmaxGallery = trackmaxAll.filter((_, i) => i !== 6 && i !== 8);
-const baliGallery = loadGallery(
-  import.meta.glob('../assets/bali-[0-9].jpeg', { eager: true })
-);
-
-const projects = [
+const PORTFOLIO = [
   {
-    category: 'Web Development',
-    title: 'Arroba Banda Larga',
-    description:
-      'Site institucional para provedor de internet fibra óptica com planos e contratação online.',
-    summary:
-      'Site institucional da Arroba Banda Larga, provedor de internet fibra óptica em Campos dos Goytacazes e região. Apresenta os planos de internet com preços, teste de velocidade em tempo real, mapa de cobertura com verificação por CEP, programa de indicação com recompensas e links para download do app. Design moderno com foco em conversão e contratação online.',
-    image: arrobaSiteThumb,
-    thumbType: 'web',
-    desktopGallery: arrobaSiteGallery,
-    mobileGallery: [],
-    links: [
-      { icon: FaGlobe, label: 'Visitar site', url: 'https://arrobabr.com.br' },
-    ],
+    id: 'pf-arroba',
+    seg: 'Provedor de internet',
+    name: 'Arroba Banda Larga',
+    desc: 'Central do cliente em web e app, com atendimento e triagem por IA integrados ao suporte.',
+    tags: ['App + Web', 'IA no atendimento', 'Clube de vantagens'],
+    kpi: '71% resolvido sem humano',
+    img: arrobaImg,
+    links: [{ icon: 'link', label: 'Visitar site', url: 'https://arrobabr.com.br' }],
   },
   {
-    category: 'Web Development',
-    title: 'Arroba — Área do Cliente',
-    description:
-      'Painel web exclusivo para clientes do provedor. Faturas, consumo e relatórios.',
-    summary:
-      'Área do cliente integrada ao site da Arroba Banda Larga. Painel completo onde os assinantes acompanham seu plano, consultam faturas e notas fiscais, monitoram o consumo semanal de download e upload, testam a velocidade em tempo real e geram relatórios em PDF. Interface responsiva que funciona perfeitamente no desktop e no celular.',
-    image: arrobaClienteThumb,
-    thumbType: 'web',
-    desktopGallery: arrobaClienteDesktop,
-    mobileGallery: arrobaClienteMobile,
+    id: 'pf-prime',
+    seg: 'Clube de benefícios',
+    name: 'Prime Gourmet Club',
+    desc: 'App de fidelidade e benefícios com automação de campanhas e painel de associados.',
+    tags: ['App mobile', 'Automação', 'Fidelização'],
+    kpi: '3x mais recompra',
+    img: primeImg,
+    links: [{ icon: 'link', label: 'Visitar site', url: 'https://primegourmet.com.br' }],
+  },
+  {
+    id: 'pf-trackmax',
+    seg: 'Gestão e monitoramento',
+    name: 'Trackmax Soluções',
+    desc: 'Sistema de rastreamento e monitoramento em tempo real, com app e integração ao ERP e ao financeiro.',
+    tags: ['Sistema interno', 'Tempo real', 'Integração ERP'],
+    kpi: '4 setores, 1 painel',
+    img: trackmaxImg,
     links: [],
   },
   {
-    category: 'Web Development',
-    title: 'Prime Gourmet — Site',
-    description:
-      'Site do clube de benefícios com vouchers Peça 2 Pague 1 em restaurantes, hotéis e mais.',
-    summary:
-      'O Prime Gourmet é um clube de benefícios. Ao assinar uma região, o cliente recebe acesso a vouchers com desconto Peça 2 Pague 1 em restaurantes, hotéis, ingressos e muito mais. Desenvolvemos o site institucional que apresenta as ofertas por cidade, os parceiros disponíveis, o fluxo de assinatura em 5 passos e os números da plataforma — mais de 8.300 estabelecimentos, 3 milhões de vouchers utilizados e R$ 250M+ em economia gerada.',
-    image: primeGourmetThumb,
-    thumbType: 'web',
-    desktopGallery: primeDesktop,
-    mobileGallery: [],
+    id: 'pf-tagmax',
+    seg: 'Rastreamento por tags',
+    name: 'TagMax',
+    desc: 'App de localização inteligente por tags Bluetooth: mapa em tempo real, geocercas e alertas.',
+    tags: ['App mobile', 'Bluetooth', 'Tempo real'],
+    kpi: 'iOS + Android nas lojas',
+    img: tagmaxImg,
     links: [
-      { icon: FaGlobe, label: 'Visitar site', url: 'https://primegourmet.com.br' },
+      { icon: 'app', label: 'Google Play', url: 'https://play.google.com/store/apps/details?id=com.tagmax.app&hl=pt_BR' },
+      { icon: 'app', label: 'App Store', url: 'https://apps.apple.com/br/app/tagmax/id6760375789' },
     ],
   },
   {
-    category: 'App Mobile',
-    title: 'Prime Gourmet — App',
-    description:
-      'App do clube de benefícios com vouchers, QR Code, mapa e economia acumulada.',
-    summary:
-      'O Prime Gourmet é um clube de benefícios. Ao assinar uma região, o cliente recebe acesso a vouchers com desconto Peça 2 Pague 1 em restaurantes, hotéis, ingressos e muito mais. Desenvolvemos o aplicativo para iOS e Android onde o assinante busca estabelecimentos por categoria, visualiza ofertas no mapa, valida vouchers via QR Code e acompanha toda a economia acumulada em tempo real.',
-    image: primeAppThumb,
-    thumbType: 'app',
-    desktopGallery: [],
-    mobileGallery: primeMobileAll,
-    links: [],
-  },
-  {
-    category: 'App Mobile',
-    title: 'TagMax',
-    description:
-      'App de rastreamento inteligente por tags. Mapa em tempo real, geocerca e alertas.',
-    summary:
-      'Aplicativo da TagMax, solução de localização inteligente por tags Bluetooth. Permite cadastrar e gerenciar múltiplas tags, visualizar a localização aproximada no mapa em tempo real, configurar geocercas, receber alertas e acompanhar a vida útil de cada tag. Disponível para iOS e Android nas lojas oficiais.',
-    image: tagmaxThumb,
-    thumbType: 'app',
-    desktopGallery: [],
-    mobileGallery: tagmaxGallery,
-    links: [
-      {
-        icon: FaGooglePlay,
-        label: 'Google Play',
-        url: 'https://play.google.com/store/apps/details?id=com.tagmax.app&hl=pt_BR',
-      },
-      {
-        icon: FaAppStoreIos,
-        label: 'App Store',
-        url: 'https://apps.apple.com/br/app/tagmax/id6760375789',
-      },
-    ],
-  },
-  {
-    category: 'App Mobile',
-    title: 'TrackMax PRO',
-    description:
-      'App de rastreamento veicular com mapa em tempo real e bloqueio remoto.',
-    summary:
-      'Aplicativo de rastreamento veicular da TrackMax. Permite monitorar a frota em tempo real no mapa, visualizar informações detalhadas de cada veículo (placa, velocidade, ignição, bateria, odômetro), bloquear e desbloquear veículos remotamente, configurar geocercas, acessar o playback de trajetos e gerar relatórios. Disponível para iOS e Android.',
-    image: trackmaxThumb,
-    thumbType: 'app',
-    desktopGallery: [],
-    mobileGallery: trackmaxGallery,
-    links: [],
-  },
-  {
-    category: 'App Mobile',
-    title: 'Best of Bali',
-    description:
-      'App de descoberta de restaurantes, spas e experiências em Bali com cupons de desconto.',
-    summary:
-      'Aplicativo para turistas e moradores de Bali descobrirem os melhores restaurantes, wellness centers, spas, cafés e experiências da ilha. Oferece cupons de desconto exclusivos, roteiros personalizados por região com itinerários sugeridos, recomendações baseadas no perfil do usuário, sistema de favoritos e mapa integrado. Navegação por abas: Home, Map, Explore, Profile e Dashboard.',
-    image: baliThumb,
-    thumbType: 'app',
-    desktopGallery: [],
-    mobileGallery: baliGallery,
+    id: 'pf-bali',
+    seg: 'Turismo & descoberta',
+    name: 'Best of Bali',
+    desc: 'App para descobrir restaurantes, spas e experiências em Bali, com cupons e roteiros personalizados.',
+    tags: ['App mobile', 'Cupons', 'Roteiros'],
+    kpi: 'Descoberta com mapa e favoritos',
+    img: baliImg,
     links: [],
   },
 ];
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.12 },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
-  },
-};
-
 export default function Portfolio() {
-  const [selected, setSelected] = useState(null);
-
+  const go = (e, id) => {
+    e.preventDefault();
+    scrollToId(id);
+  };
   return (
-    <section className="portfolio section" id="portfolio">
-      <div className="container">
-        <motion.div
-          className="portfolio__header"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <span className="section-tag">// Portfólio</span>
-          <h2 className="section-heading">Veja o que já fizemos</h2>
-          <p className="portfolio__subtitle">
-            Resultados reais para negócios reais. Confira alguns dos projetos que
-            entregamos.
+    <section className="section" id="portfolio">
+      <div className="frame">
+        <div className="section-head reveal">
+          <div>
+            <span className="eyebrow">Portfólio</span>
+            <h2 className="sec-title">
+              Veja a Neo Eden <span className="a">no ar</span>
+            </h2>
+          </div>
+          <p className="sec-lead">
+            Uma amostra do que construímos. Cada projeto nasceu de um problema real e hoje roda no
+            dia a dia de quem confiou na gente.
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="portfolio__grid"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-60px' }}
-        >
-          {projects.map((project) => (
-            <motion.div
-              key={project.title}
-              className="portfolio-card"
-              variants={cardVariants}
-              onClick={() => setSelected(project)}
-            >
-              <div className="portfolio-card__preview">
-                <div
-                  className={`portfolio-card__image ${
-                    project.thumbType === 'app'
-                      ? 'portfolio-card__image--app'
-                      : ''
-                  }`}
-                >
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="portfolio-card__img"
-                  />
+        <div className="pf-list">
+          {PORTFOLIO.map((p, i) => (
+            <article className={'pf-row reveal' + (i % 2 ? ' flip' : '')} key={p.id}>
+              <div className="pf-visual">
+                <img src={p.img} alt={`Projeto ${p.name}`} loading="lazy" />
+                <span className="pf-index">{String(i + 1).padStart(2, '0')}</span>
+              </div>
+              <div className="pf-info">
+                <span className="pf-seg">{p.seg}</span>
+                <h3 className="pf-name">{p.name}</h3>
+                <p className="pf-desc">{p.desc}</p>
+                <div className="pf-tags">
+                  {p.tags.map((t) => (
+                    <span className="pf-tag" key={t}>
+                      {t}
+                    </span>
+                  ))}
                 </div>
-                <div className="portfolio-card__overlay">
-                  <span className="portfolio-card__overlay-text">
-                    Ver Projeto <HiOutlineArrowRight />
+                <div className="pf-foot">
+                  <span className="pf-kpi">
+                    <span className="d" />
+                    {p.kpi}
                   </span>
                 </div>
+                {p.links.length > 0 && (
+                  <div className="pf-links">
+                    {p.links.map((l) => (
+                      <a
+                        key={l.label}
+                        className="pf-link"
+                        href={l.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Icon name={l.icon} size={14} />
+                        {l.label}
+                        <Icon name="arrow" size={13} />
+                      </a>
+                    ))}
+                  </div>
+                )}
               </div>
-              <div className="portfolio-card__info">
-                <span className="portfolio-card__category">
-                  {project.category}
-                </span>
-                <h3 className="portfolio-card__title">{project.title}</h3>
-                <p className="portfolio-card__desc">{project.description}</p>
-              </div>
-            </motion.div>
+            </article>
           ))}
+        </div>
 
-          {/* CTA Card */}
-          <motion.a
-            href="#contato"
-            className="portfolio-card portfolio-card--cta"
-            variants={cardVariants}
-          >
-            <div className="portfolio-card__cta-inner">
-              <img src={neoEdenLogo} alt="" className="portfolio-card__cta-n" />
-              <span className="portfolio-card__cta-tag">Próximo Projeto</span>
-              <h3 className="portfolio-card__cta-title">Seu Projeto Aqui</h3>
-              <p className="portfolio-card__cta-desc">
-                Vamos transformar sua ideia em resultado real.
-              </p>
-              <span className="portfolio-card__cta-btn">
-                Iniciar Projeto <HiOutlineArrowRight />
-              </span>
-            </div>
-          </motion.a>
-        </motion.div>
+        <div className="pf-cta reveal">
+          <span className="pf-cta-txt">Quer ver o seu projeto nessa lista?</span>
+          <a href="#contato" onClick={(e) => go(e, 'contato')} className="btn btn-primary">
+            Começar o meu{' '}
+            <span className="arr">
+              <Icon name="arrow" size={15} />
+            </span>
+          </a>
+        </div>
       </div>
-
-      <AnimatePresence>
-        {selected && (
-          <ProjectModal project={selected} onClose={() => setSelected(null)} />
-        )}
-      </AnimatePresence>
     </section>
   );
 }
