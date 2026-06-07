@@ -2,15 +2,15 @@ import { useReveal, useCountUp, useLive, useActiveSection, NAV } from './lib/hoo
 import { Grain, ScrollProgress, Navbar } from './components/Chrome.jsx';
 import Hero from './components/Hero.jsx';
 import Problems from './components/Problems.jsx';
-import Solutions from './components/Solutions.jsx';
-import Cases from './components/Cases.jsx';
+import Capabilities from './components/Capabilities.jsx';
+import Process from './components/Process.jsx';
 import Portfolio from './components/Portfolio.jsx';
 import Diff, { Impact } from './components/Diff.jsx';
 import Track from './components/Track.jsx';
-import Process from './components/Process.jsx';
 import Pricing from './components/Pricing.jsx';
 import About from './components/About.jsx';
 import FAQ from './components/FAQ.jsx';
+import FinalCta from './components/FinalCta.jsx';
 import Contact from './components/Contact.jsx';
 import Footer from './components/Footer.jsx';
 
@@ -29,16 +29,16 @@ export default function App() {
       <Navbar active={active} />
       <Hero />
       <Problems />
-      <Solutions />
-      <Cases />
+      <Capabilities />
+      <Process />
       <Portfolio />
       <Diff />
       <Impact />
       <Track />
-      <Process />
       <Pricing />
       <About />
       <FAQ />
+      <FinalCta />
       <Contact />
       <Footer />
     </>

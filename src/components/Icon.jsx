@@ -17,6 +17,10 @@ const ICONS = {
   calendar: 'M4 5h16v15H4z M4 9h16 M8 3v4 M16 3v4 M8 13h2v2H8z',
   arrow: 'M5 12h14 M13 6l6 6-6 6',
   check: 'M5 12l5 5L19 7',
+  box: 'M12 3 21 7.5v9L12 21 3 16.5v-9z M3 7.5l9 4.5 9-4.5 M12 12v9',
+  gauge: 'M3 16a9 9 0 0 1 18 0 M3 16h2 M19 16h2 M12 16l4-4',
+  users: 'M9 11a3.4 3.4 0 1 0 0-6.8 3.4 3.4 0 0 0 0 6.8z M3 20a6 6 0 0 1 12 0 M16.5 4.6a3 3 0 0 1 0 6 M17 14.2a6 6 0 0 1 4 5.8',
+  menu: 'M6 3h12v18H6z M9.5 8h5 M9.5 12h5 M9.5 16h3',
 };
 
 export default function Icon({ name, size = 20, sw = 1.6, className }) {

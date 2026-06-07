@@ -63,7 +63,7 @@ export function Navbar({ active }) {
             <Icon name="layers" size={15} /> Acompanhar projeto
           </a>
           <a href="#contato" onClick={(e) => go(e, 'contato')} className="btn btn-primary btn-sm">
-            Falar com nossa equipe{' '}
+            Falar com um especialista{' '}
             <span className="arr">
               <Icon name="arrow" size={15} />
             </span>
@@ -98,7 +98,7 @@ export function Navbar({ active }) {
             <Icon name="layers" size={15} /> Acompanhar projeto
           </a>
           <a href="#contato" onClick={(e) => go(e, 'contato')} className="btn btn-primary">
-            Falar com nossa equipe{' '}
+            Falar com um especialista{' '}
             <span className="arr">
               <Icon name="arrow" size={15} />
             </span>

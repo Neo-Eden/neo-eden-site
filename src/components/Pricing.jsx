@@ -19,7 +19,7 @@ const PLANS = [
     unit: '',
     desc: 'Um time dedicado cuidando e evoluindo seus sistemas mês a mês, com prioridade no atendimento.',
     feats: ['Time dedicado ao seu negócio', 'Roadmap mensal com você', 'Novas funções recorrentes', 'Suporte prioritário'],
-    cta: 'Falar com nossa equipe',
+    cta: 'Falar com um especialista',
     featured: true,
   },
   {
@@ -29,7 +29,7 @@ const PLANS = [
     unit: 'demanda',
     desc: 'Ajustes, correções e melhorias pontuais em sistemas que já estão rodando, sejam seus ou de terceiros.',
     feats: ['Melhorias pontuais', 'Correção e manutenção', 'Integrações novas', 'Sem mensalidade obrigatória'],
-    cta: 'Conversar',
+    cta: 'Falar com a gente',
     featured: false,
   },
 ];

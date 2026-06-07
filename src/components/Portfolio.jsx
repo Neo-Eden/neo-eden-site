@@ -72,14 +72,14 @@ export default function Portfolio() {
       <div className="frame">
         <div className="section-head reveal">
           <div>
-            <span className="eyebrow">Portfólio</span>
+            <span className="eyebrow">Projetos</span>
             <h2 className="sec-title">
-              Veja a Neo Eden <span className="a">no ar</span>
+              Negócios reais, <span className="a">já no ar</span>
             </h2>
           </div>
           <p className="sec-lead">
-            Uma amostra do que construímos. Cada projeto nasceu de um problema real e hoje roda no
-            dia a dia de quem confiou na gente.
+            Cada projeto nasceu de um problema real e hoje roda no dia a dia de quem confiou na
+            gente. Veja o que já está funcionando.
           </p>
         </div>
 

@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 export const NAV = [
   { id: 'problemas', label: 'Problemas' },
   { id: 'solucoes', label: 'Soluções' },
-  { id: 'portfolio', label: 'Portfólio' },
-  { id: 'acompanhar', label: 'Portal' },
   { id: 'processo', label: 'Processo' },
+  { id: 'portfolio', label: 'Projetos' },
+  { id: 'acompanhar', label: 'Portal' },
   { id: 'contato', label: 'Contato' },
 ];
 

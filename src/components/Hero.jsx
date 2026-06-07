@@ -104,13 +104,13 @@ export default function Hero() {
         <div className="hero-split">
           <div className="hero-inner">
             <h1 className="hero-h1">
-              Seu negócio cresceu. <span className="muted">Sua operação</span>{' '}
-              <span className="a">acompanhou?</span>
+              Sua empresa cresceu. <span className="muted">Sua operação</span>{' '}
+              <span className="a">cresceu junto?</span>
             </h1>
             <p className="hero-sub">
               Criamos{' '}
-              <strong>sistemas, aplicativos, automações e integrações sob medida</strong> para
-              empresas que precisam crescer sem aumentar o caos operacional.
+              <strong>aplicativos, sistemas, automações e soluções digitais</strong> para empresas
+              que precisam de mais controle, organização e eficiência.
             </p>
             <div className="hero-cta">
               <a
@@ -118,7 +118,7 @@ export default function Hero() {
                 onClick={(e) => go(e, 'contato')}
                 className="btn btn-primary btn-lg"
               >
-                Falar com nossa equipe{' '}
+                Falar com um especialista{' '}
                 <span className="arr">
                   <Icon name="arrow" size={16} />
                 </span>
@@ -138,18 +138,6 @@ export default function Hero() {
           </div>
           <div className="hero-mock">
             <Mockup />
-          </div>
-        </div>
-
-        <div className="trustbar reveal">
-          <span className="tlabel">Empresas que confiam na Neo Eden</span>
-          <div className="tlogos">
-            {['Arroba Banda Larga', 'Prime Gourmet Club', 'Trackmax Soluções'].map((l) => (
-              <span key={l} className="tlogo">
-                <span className="tdot" />
-                {l}
-              </span>
-            ))}
           </div>
         </div>
       </div>

@@ -10,19 +10,6 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div className="frame">
-        <h2 className="footer-cta reveal">
-          Pronto para tirar o gargalo <span className="a">do caminho?</span>
-        </h2>
-        <p className="footer-sub reveal">
-          Comece por uma conversa de diagnóstico gratuita. Sem compromisso, sem enrolação.
-        </p>
-        <a href="#contato" onClick={(e) => go(e, 'contato')} className="btn btn-primary btn-lg reveal">
-          Falar com nossa equipe{' '}
-          <span className="arr">
-            <Icon name="arrow" size={16} />
-          </span>
-        </a>
-
         <div className="footer-cols reveal reveal-stagger">
           <div className="fcol fcol-brand">
             <div className="row">
@@ -32,8 +19,8 @@ export default function Footer() {
               </span>
             </div>
             <p>
-              Empresa de tecnologia. Sistemas, aplicativos, automações e IA sob medida para resolver
-              problemas reais de empresas.
+              Tecnologia sob medida para empresas que precisam de mais controle, organização e
+              eficiência. A gente resolve o que trava a sua operação.
             </p>
             <div className="footer-socials">
               <a href="https://www.instagram.com/neoedendigital/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
@@ -49,18 +36,18 @@ export default function Footer() {
           </div>
           <div className="fcol">
             <div className="ft">Soluções</div>
-            <a href="#solucoes" onClick={(e) => go(e, 'solucoes')}>Aplicativos</a>
+            <a href="#solucoes" onClick={(e) => go(e, 'solucoes')}>Aplicativos personalizados</a>
             <a href="#solucoes" onClick={(e) => go(e, 'solucoes')}>Sistemas sob medida</a>
-            <a href="#solucoes" onClick={(e) => go(e, 'solucoes')}>Automações</a>
-            <a href="#solucoes" onClick={(e) => go(e, 'solucoes')}>Inteligência Artificial</a>
-            <a href="#solucoes" onClick={(e) => go(e, 'solucoes')}>Integrações</a>
+            <a href="#solucoes" onClick={(e) => go(e, 'solucoes')}>Automações e IA</a>
+            <a href="#solucoes" onClick={(e) => go(e, 'solucoes')}>Dashboards gerenciais</a>
+            <a href="#solucoes" onClick={(e) => go(e, 'solucoes')}>Área do cliente</a>
+            <a href="#solucoes" onClick={(e) => go(e, 'solucoes')}>Integrações e APIs</a>
           </div>
           <div className="fcol">
             <div className="ft">Empresa</div>
-            <a href="#exemplos" onClick={(e) => go(e, 'exemplos')}>Exemplos</a>
-            <a href="#portfolio" onClick={(e) => go(e, 'portfolio')}>Portfólio</a>
+            <a href="#portfolio" onClick={(e) => go(e, 'portfolio')}>Projetos</a>
+            <a href="#processo" onClick={(e) => go(e, 'processo')}>Como funciona</a>
             <a href="#acompanhar" onClick={(e) => go(e, 'acompanhar')}>Portal do cliente</a>
-            <a href="#processo" onClick={(e) => go(e, 'processo')}>Como trabalhamos</a>
             <a href="#empresa" onClick={(e) => go(e, 'empresa')}>Quem somos</a>
             <a href="#faq" onClick={(e) => go(e, 'faq')}>Dúvidas</a>
           </div>
